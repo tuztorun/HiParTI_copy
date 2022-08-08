@@ -31,7 +31,7 @@ You may use the following steps to install the required libraries:
 # Download & Set up Projects:
 
 ## Download
-1. `git clone -b sparta https://github.com/pnnl/HiParTI.git` (Sparta)
+1. `git clone -b sparta https://github.com/tuztorun/HiParTI_copy.git` (Sparta)
 2. `git clone https://gitlab.com/jiawenliu64/ial` (IAL)
 3. `git clone https://gitlab.com/jiawenliu64/tensors` (Datasets)
 
