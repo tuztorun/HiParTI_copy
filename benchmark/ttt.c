@@ -188,7 +188,9 @@ int main(int argc, char *argv[]) {
     //     }
     // }
 
-    sptSparseTensorStatus(&Z, stdout);
+   
+//    sptSparseTensorStatus(&Z, stdout); // TT
+
     //sptAssert(sptDumpSparseTensor(&Z, 0, stdout) == 0);
 
     if(fZ != NULL) {
