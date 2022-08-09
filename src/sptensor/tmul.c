@@ -1039,6 +1039,8 @@ if(experiment_modes == 3){
     total_time += X_time;
     sptStartTimer(timer);
 
+//TT
+/*
     //sptAssert(sptDumpSparseTensor(Y, 0, stdout) == 0);
     sptIndex * mode_order_Y = (sptIndex *)malloc(nmodes_Y * sizeof(sptIndex));
     ci = 0;
@@ -1302,6 +1304,9 @@ sptStartTimer(timer);
     }
     sptStopTimer(timer);
     total_time += sptPrintElapsedTime(timer, "Output Sorting");
+	
+	*/ //TT
+	
     printf("[Total time]: %.6f s\n", total_time);
     printf("\n");
 }  
