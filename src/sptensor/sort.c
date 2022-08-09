@@ -654,6 +654,7 @@ void sptSparseTensorSortIndex(sptSparseTensor *tsr, int force, int tk)
             #pragma omp single nowait
             {
                 spt_QuickSortIndex(tsr, 0, tsr->nnz);
+				printf("\n________________\n sorting tsr with nnz: %ld \n________________\n", tsr->nnz); // TT
             }
         }
     }
