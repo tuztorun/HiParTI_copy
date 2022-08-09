@@ -1036,14 +1036,14 @@ if(experiment_modes == 3){
     sptStopTimer(timer);
     //total_time += sptPrintElapsedTime(timer, "Sort X");
     double X_time = sptElapsedTime(timer);
-    total_time += X_time;
-	
+    
 	printf("[total X time]: %.6f s\n", X_time);
 	
     
 
 //TT
 /*
+	total_time += X_time;
 	sptStartTimer(timer);
 	
     //sptAssert(sptDumpSparseTensor(Y, 0, stdout) == 0);
@@ -1310,10 +1310,11 @@ sptStartTimer(timer);
     sptStopTimer(timer);
     total_time += sptPrintElapsedTime(timer, "Output Sorting");
 	
-	*/ //TT
-	
     printf("[Total time]: %.6f s\n", total_time);
     printf("\n");
+	
+		*/ //TT
+		
 }  
 
 //4: HTY + HTA on HM
