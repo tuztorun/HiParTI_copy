@@ -987,8 +987,10 @@ if(experiment_modes == 3){
     sptIndex nmodes_X = X->nmodes;
     sptIndex nmodes_Y = Y->nmodes;
     sptTimer timer;
+	sptTimer timer_tt;
     double total_time = 0;
     sptNewTimer(&timer, 0);
+	sptNewTimer(&timer_tt, 0);
 
     if(num_cmodes >= X->nmodes) {
         spt_CheckError(SPTERR_SHAPE_MISMATCH, "CPU  SpTns * SpTns", "shape mismatch");
@@ -1018,12 +1020,18 @@ if(experiment_modes == 3){
     sptAssert(ci == nmodes_X);
     /// Shuffle tensor indices according to mode_order_X
     sptSparseTensorShuffleModes(X, mode_order_X);
+	
+	sptStartTimer(timer_tt);
 
     // printf("Permuted X:\n");
     // sptAssert(sptDumpSparseTensor(X, 0, stdout) == 0);
     for(sptIndex m = 0; m < nmodes_X; ++m) mode_order_X[m] = m; // reset mode_order
     // sptSparseTensorSortIndexCmode(X, 1, 1, 1, 2);
     sptSparseTensorSortIndex(X, 1, tk);
+	
+	sptStopTimer(timer_tt);
+    double only_sort_time= sptPrintElapsedTime(timer_tt, "Only sorting X time");
+
     
     sptStopTimer(timer);
     //total_time += sptPrintElapsedTime(timer, "Sort X");
