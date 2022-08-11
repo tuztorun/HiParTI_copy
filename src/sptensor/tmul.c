@@ -1031,8 +1031,12 @@ if(experiment_modes == 3){
 
     // printf("Permuted X:\n");
     // sptAssert(sptDumpSparseTensor(X, 0, stdout) == 0);
-    for(sptIndex m = 0; m < nmodes_X; ++m) 
-		mode_order_X[m] = m; // reset mode_order
+	
+    // for(sptIndex m = 0; m < nmodes_X; ++m) 
+		// mode_order_X[m] = m; // reset mode_order
+	
+	for(sptIndex m = 0; m < nmodes_X; ++m) 
+		mode_order_X[m] = (m+1) % nmodes_X; // reset mode_order
 	
     // sptSparseTensorSortIndexCmode(X, 1, 1, 1, 2);
 	
