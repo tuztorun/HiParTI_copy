@@ -1036,8 +1036,8 @@ if(experiment_modes == 3){
 	
     // sptSparseTensorSortIndexCmode(X, 1, 1, 1, 2);
 	
-    // sptSparseTensorSortIndex(X, 1, tk);
-	sptSparseTensorSortIndexExceptSingleMode(X, 1, mode_order_X, tk);
+    sptSparseTensorSortIndex(X, 1, tk);
+	// sptSparseTensorSortIndexExceptSingleMode(X, 1, mode_order_X, tk);
 	
 	sptStopTimer(timer_tt);
     double only_sort_time= sptPrintElapsedTime(timer_tt, "Only sorting X time");
