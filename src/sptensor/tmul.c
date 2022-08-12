@@ -1007,7 +1007,7 @@ if(experiment_modes == 3){
 
     // sptStartTimer(timer);
     // / Shuffle X indices and sort X as the order of free modes -> contract modes; mode_order also separate all the modes to free and contract modes separately.
-    // sptIndex * mode_order_X = (sptIndex *)malloc(nmodes_X * sizeof(sptIndex));
+    sptIndex * mode_order_X = (sptIndex *)malloc(nmodes_X * sizeof(sptIndex));
     // sptIndex ci = nmodes_X - num_cmodes, fi = 0;
     // for(sptIndex m = 0; m < nmodes_X; ++m) {
         // if(sptInArray(cmodes_X, num_cmodes, m) == -1) {
