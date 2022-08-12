@@ -166,7 +166,7 @@ int main(int argc, char *argv[]) {
     sptSparseTensorStatus(&X, stdout);
 
     sptAssert(sptLoadSparseTensor(&Y, 1, Yfname) == 0);
-    sptSparseTensorStatus(&Y, stdout);   
+    // sptSparseTensorStatus(&Y, stdout);   
     }
     //printf("Original Tensors: \n"); 
     //sptAssert(sptDumpSparseTensor(&X, 0, stdout) == 0);
