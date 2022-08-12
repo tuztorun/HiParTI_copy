@@ -1029,7 +1029,7 @@ if(experiment_modes == 3){
     //total_time += sptPrintElapsedTime(timer, "Sort X");
     double X_time = sptElapsedTime(timer);
 	
-	printf("[shuffle X time]: %.6f s\n", X_time);
+	printf("%.6f s : time_shuffle_X \n", X_time);
 	
 	sptStartTimer(timer_tt);
 
@@ -1053,9 +1053,11 @@ if(experiment_modes == 3){
 		sptSparseTensorSortIndexExceptSingleMode(X, 1, mode_order_X, tk);
 	
 	sptStopTimer(timer_tt);
-    double only_sort_time= sptPrintElapsedTime(timer_tt, "Only sorting X time");
+    double only_sort_time= sptElapsedTime(timer_tt);
+	printf("%.6f s : time_sorting_X \n", only_sort_time);
+	// double only_sort_time= sptPrintElapsedTime(timer_tt, "Only sorting X time");
 	
-	printf("________________________\n");
+	printf("_____________________________________________\n");
 
 
 //TT
