@@ -1,3 +1,6 @@
+#define CHOICE_MODE 1
+#define CHOICE_SORT 0
+
 /*
     This file is part of ParTI!.
 
@@ -22,6 +25,7 @@
 #include <string.h>
 #include <limits.h>
 #include <numa.h>
+
 
 /** All combined:
  * 0: COOY + SPA
@@ -1035,16 +1039,23 @@ if(experiment_modes == 3){
     // for(sptIndex m = 0; m < nmodes_X; ++m) 
 		// mode_order_X[m] = m; // reset mode_order
 	
+	printf("\n CHOICE_MODE : %d \n CHOICE_SORT : %d \n", CHOICE_MODE, CHOICE_SORT);
+	
 	for(sptIndex m = 0; m < nmodes_X; ++m) 
-		mode_order_X[m] = (m+1) % nmodes_X; // reset mode_order
+		mode_order_X[m] = (m + CHOICE_MODE) % nmodes_X; // reset mode_order
 	
     // sptSparseTensorSortIndexCmode(X, 1, 1, 1, 2);
 	
-    sptSparseTensorSortIndex(X, 1, tk);
-	// sptSparseTensorSortIndexExceptSingleMode(X, 1, mode_order_X, tk);
+	if ( CHOICE_SORT == 0 )
+		sptSparseTensorSortIndex(X, 1, tk);
+
+	if ( CHOICE_SORT == 1 )
+		sptSparseTensorSortIndexExceptSingleMode(X, 1, mode_order_X, tk);
 	
 	sptStopTimer(timer_tt);
     double only_sort_time= sptPrintElapsedTime(timer_tt, "Only sorting X time");
+	
+	printf("________________________\n");
 
 
 //TT
