@@ -1029,6 +1029,8 @@ if(experiment_modes == 3){
     //total_time += sptPrintElapsedTime(timer, "Sort X");
     double X_time = sptElapsedTime(timer);
 	
+	printf("%d : CHOICE_MODE \n%d : CHOICE_SORT \n", CHOICE_MODE, CHOICE_SORT);
+	
 	printf("%.6f s : time_shuffle_X \n", X_time);
 	
 	sptStartTimer(timer_tt);
@@ -1039,7 +1041,7 @@ if(experiment_modes == 3){
     // for(sptIndex m = 0; m < nmodes_X; ++m) 
 		// mode_order_X[m] = m; // reset mode_order
 	
-	printf("%d : CHOICE_MODE \n%d : CHOICE_SORT \n", CHOICE_MODE, CHOICE_SORT);
+	
 	
 	for(sptIndex m = 0; m < nmodes_X; ++m) 
 		mode_order_X[m] = (m + CHOICE_MODE) % nmodes_X; // reset mode_order
