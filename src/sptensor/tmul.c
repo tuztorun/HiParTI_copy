@@ -990,48 +990,48 @@ if(experiment_modes == 3){
     int result;
     sptIndex nmodes_X = X->nmodes;
     sptIndex nmodes_Y = Y->nmodes;
-    sptTimer timer;
+    // sptTimer timer;
 	sptTimer timer_tt;
     double total_time = 0;
-    sptNewTimer(&timer, 0);
+    // sptNewTimer(&timer, 0);
 	sptNewTimer(&timer_tt, 0);
 
     if(num_cmodes >= X->nmodes) {
         spt_CheckError(SPTERR_SHAPE_MISMATCH, "CPU  SpTns * SpTns", "shape mismatch");
     }
-    for(sptIndex m = 0; m < num_cmodes; ++m) {
-        if(X->ndims[cmodes_X[m]] != Y->ndims[cmodes_Y[m]]) {
-            spt_CheckError(SPTERR_SHAPE_MISMATCH, "CPU  SpTns * SpTns", "shape mismatch");
-        }
-    }
+    // for(sptIndex m = 0; m < num_cmodes; ++m) {
+        // if(X->ndims[cmodes_X[m]] != Y->ndims[cmodes_Y[m]]) {
+            // spt_CheckError(SPTERR_SHAPE_MISMATCH, "CPU  SpTns * SpTns", "shape mismatch");
+        // }
+    // }
 
-    sptStartTimer(timer);
-    /// Shuffle X indices and sort X as the order of free modes -> contract modes; mode_order also separate all the modes to free and contract modes separately.
-    sptIndex * mode_order_X = (sptIndex *)malloc(nmodes_X * sizeof(sptIndex));
-    sptIndex ci = nmodes_X - num_cmodes, fi = 0;
-    for(sptIndex m = 0; m < nmodes_X; ++m) {
-        if(sptInArray(cmodes_X, num_cmodes, m) == -1) {
-            mode_order_X[fi] = m;
-            ++ fi;
-        }
-    }
-    sptAssert(fi == nmodes_X - num_cmodes);
-    /// Copy the contract modes while keeping the contraction mode order
-    for(sptIndex m = 0; m < num_cmodes; ++m) {
-        mode_order_X[ci] = cmodes_X[m];
-        ++ ci;
-    }
-    sptAssert(ci == nmodes_X);
-    /// Shuffle tensor indices according to mode_order_X
-    sptSparseTensorShuffleModes(X, mode_order_X);
+    // sptStartTimer(timer);
+    // / Shuffle X indices and sort X as the order of free modes -> contract modes; mode_order also separate all the modes to free and contract modes separately.
+    // sptIndex * mode_order_X = (sptIndex *)malloc(nmodes_X * sizeof(sptIndex));
+    // sptIndex ci = nmodes_X - num_cmodes, fi = 0;
+    // for(sptIndex m = 0; m < nmodes_X; ++m) {
+        // if(sptInArray(cmodes_X, num_cmodes, m) == -1) {
+            // mode_order_X[fi] = m;
+            // ++ fi;
+        // }
+    // }
+    // sptAssert(fi == nmodes_X - num_cmodes);
+    // / Copy the contract modes while keeping the contraction mode order
+    // for(sptIndex m = 0; m < num_cmodes; ++m) {
+        // mode_order_X[ci] = cmodes_X[m];
+        // ++ ci;
+    // }
+    // sptAssert(ci == nmodes_X);
+    // / Shuffle tensor indices according to mode_order_X
+    // sptSparseTensorShuffleModes(X, mode_order_X);
 	
-	sptStopTimer(timer);
-    //total_time += sptPrintElapsedTime(timer, "Sort X");
-    double X_time = sptElapsedTime(timer);
+	// sptStopTimer(timer);
+    // total_time += sptPrintElapsedTime(timer, "Sort X");
+    // double X_time = sptElapsedTime(timer);
+	
+	// printf("%.6f s : time_shuffle_X \n", X_time);
 	
 	printf("%d : CHOICE_MODE \n%d : CHOICE_SORT \n", CHOICE_MODE, CHOICE_SORT);
-	
-	printf("%.6f s : time_shuffle_X \n", X_time);
 	
 	sptStartTimer(timer_tt);
 
