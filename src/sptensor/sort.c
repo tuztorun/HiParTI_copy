@@ -24,6 +24,7 @@
 #include <limits.h>
 #include <numa.h>
 
+
 static void spt_QuickSortIndex(sptSparseTensor *tsr, sptNnzIndex l, sptNnzIndex r);
 static void spt_QuickSortIndexCmode(sptSparseTensor *tsr, sptNnzIndex l, sptNnzIndex r, int cmode_start, int num_cmode);
 static void spt_QuickSortIndexRowBlock(sptSparseTensor *tsr, sptNnzIndex l, sptNnzIndex r, sptElementIndex sk_bits);

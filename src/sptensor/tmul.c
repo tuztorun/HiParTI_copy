@@ -27,6 +27,55 @@
 #include <numa.h>
 
 
+
+int tugba_sptSparseTensorSort(sptSparseTensor * const X, int tk, int tugba_sort_choice, int tugba_mode_choice )
+{
+  
+    sptIndex nmodes_X = X->nmodes;
+    // sptTimer timer;
+	sptTimer timer_tt;
+    // sptNewTimer(&timer, 0);
+	sptNewTimer(&timer_tt, 0);
+
+   // / Shuffle X indices and sort X as the order of free modes -> contract modes; mode_order also separate all the modes to free and contract modes separately.
+    sptIndex * mode_order_X = (sptIndex *)malloc(nmodes_X * sizeof(sptIndex));
+	
+	printf("%d : mode_choice \n%d : sort_choice \n", tugba_mode_choice, tugba_sort_choice);
+	
+	sptStartTimer(timer_tt);
+
+    // printf("Permuted X:\n");
+    // sptAssert(sptDumpSparseTensor(X, 0, stdout) == 0);
+	
+    // for(sptIndex m = 0; m < nmodes_X; ++m) 
+		// mode_order_X[m] = m; // reset mode_order
+	
+	printf ("mode order : ");
+	
+	for(sptIndex m = 0; m < nmodes_X; ++m) {
+		mode_order_X[m] = (m + tugba_mode_choice) % nmodes_X; // reset mode_order
+		printf ("%d ", mode_order_X[m]);
+	}
+	
+	
+    // sptSparseTensorSortIndexCmode(X, 1, 1, 1, 2);
+	
+	if ( tugba_sort_choice == 0 )
+		sptSparseTensorSortIndex(X, 1, tk);
+
+	if ( tugba_sort_choice == 1 )
+		sptSparseTensorSortIndexExceptSingleMode(X, 1, mode_order_X, tk);
+	
+	sptStopTimer(timer_tt);
+    double only_sort_time= sptElapsedTime(timer_tt);
+	printf("%.6f s : time_sorting_X \n", only_sort_time);
+	// double only_sort_time= sptPrintElapsedTime(timer_tt, "Only sorting X time");
+	
+	printf("_____________________________________________\n");
+	
+}
+
+
 /** All combined:
  * 0: COOY + SPA
  * 1: COOY + HTA

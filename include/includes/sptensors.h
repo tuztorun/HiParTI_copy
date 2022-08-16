@@ -167,6 +167,7 @@ int sptCudaSparseTensorMulMatrixOneKernel(sptSemiSparseTensor *Y, sptSparseTenso
 
 int sptSparseTensorMulVector(sptSemiSparseTensor *Y, sptSparseTensor * const X, sptValueVector * const V, sptIndex mode);
 
+int tugba_sptSparseTensorSort(sptSparseTensor * const X, int tk, int tugba_sort_choice, int tugba_mode_choice );
 int sptSparseTensorMulTensor(sptSparseTensor *Z, sptSparseTensor * const X, sptSparseTensor *const Y, sptIndex num_cmodes, sptIndex * cmodes_X, sptIndex * cmodes_Y, int nt, int output_sorting, int placement);
 
 /**

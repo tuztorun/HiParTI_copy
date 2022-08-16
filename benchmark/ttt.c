@@ -46,7 +46,12 @@ int main(int argc, char *argv[]) {
     int output_sorting=1;
     int niters = 5;
     int placement = 0;
-    int nt = 1;
+    // int nt = 1;
+	int nt = omp_get_max_threads();
+	
+	int tugba_sort_choice = 0;
+	int tugba_mode_choice = 0;
+	
 
     if(argc < 3) {
         print_usage(argv);
@@ -64,6 +69,8 @@ int main(int argc, char *argv[]) {
         {"p", optional_argument, 0, 'p'},
         {"cuda-dev-id", optional_argument, 0, 'd'},
         {"nt", optional_argument, 0, 't'},
+		{"tugba_sort_choice", optional_argument, 0, 's'},
+		{"tugba_mode_choice", optional_argument, 0, 'c'},
         {"help", no_argument, 0, 0},
         {0, 0, 0, 0}
     };
@@ -71,7 +78,7 @@ int main(int argc, char *argv[]) {
     int c;
     for(;;) {
         int option_index = 0;
-        c = getopt_long(argc, argv, "X:Y:m:x:y:o:p:Z:d:t:", long_options, &option_index);
+        c = getopt_long(argc, argv, "X:Y:m:x:y:o:p:Z:d:t:s:c:", long_options, &option_index);
         if(c == -1) {
             break;
         }
@@ -124,6 +131,12 @@ int main(int argc, char *argv[]) {
         case 't':
             sscanf(optarg, "%d", &nt);
             break;
+		 case 's':
+            sscanf(optarg, "%d", &tugba_sort_choice);
+            break;
+		case 'c':
+            sscanf(optarg, "%d", &tugba_mode_choice);
+            break;
         case '?':   /* invalid option */
         case 'h':
         default:
@@ -165,7 +178,7 @@ int main(int argc, char *argv[]) {
     sptAssert(sptLoadSparseTensor(&X, 1, Xfname) == 0);
     sptSparseTensorStatus(&X, stdout);
 
-    sptAssert(sptLoadSparseTensor(&Y, 1, Yfname) == 0);
+    // sptAssert(sptLoadSparseTensor(&Y, 1, Yfname) == 0); //TT
     // sptSparseTensorStatus(&Y, stdout);   
     }
     //printf("Original Tensors: \n"); 
@@ -173,11 +186,13 @@ int main(int argc, char *argv[]) {
     //sptAssert(sptDumpSparseTensor(&Y, 0, stdout) == 0);   
 
     /* For warm-up caches, timing not included */
-    if(cuda_dev_id == -2) {     
-            sptAssert(sptSparseTensorMulTensor(&Z, &X, &Y, num_cmodes, cmodes_X, cmodes_Y, nt, output_sorting, placement) == 0);
-    } else if(cuda_dev_id == -1) {
+    // if(cuda_dev_id == -2) {     //TT
+            // sptAssert(sptSparseTensorMulTensor(&Z, &X, &Y, num_cmodes, cmodes_X, cmodes_Y, nt, output_sorting, placement) == 0);
+    // } else if(cuda_dev_id == -1) {
         // sptAssert(sptOmpSparseTensorMulMatrix(&Y, &X, &U, mode) == 0);
-    }
+    // }
+	
+	tugba_sptSparseTensorSort(&X, nt, tugba_sort_choice, tugba_mode_choice );//TT
 
     // for(int it=0; it<niters; ++it) {
     //     sptFreeSparseTensor(&Z);
@@ -193,11 +208,11 @@ int main(int argc, char *argv[]) {
 
     //sptAssert(sptDumpSparseTensor(&Z, 0, stdout) == 0);
 
-    if(fZ != NULL) {
-        sptSparseTensorSortIndex(&Z, 1, 1);
+    // if(fZ != NULL) { // TT
+        // sptSparseTensorSortIndex(&Z, 1, 1);
         //sptAssert(sptDumpSparseTensor(&Z, 0, fZ) == 0);
-        fclose(fZ);
-    }
+        // fclose(fZ);
+    // }
 
     //sptFreeSparseTensor(&Y);
     //sptFreeSparseTensor(&X);
