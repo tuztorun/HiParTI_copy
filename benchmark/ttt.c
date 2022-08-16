@@ -31,6 +31,8 @@ void print_usage(char ** argv) {
     printf("         -x CONTRACT MODES FOR TENSOR X (0-based)\n");
     printf("         -y CONTRACT MODES FOR TENSOR Y (0-based)\n");
     printf("         -t NTHREADS, --nt=NT (Optinal)\n");
+	printf("         -s sort_choice (Optinal)\n");
+	printf("         -c mode_choice (Optinal)\n");
     printf("         --help\n");
     printf("\n");
 }

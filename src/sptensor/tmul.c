@@ -57,6 +57,7 @@ int tugba_sptSparseTensorSort(sptSparseTensor * const X, int tk, int tugba_sort_
 		printf ("%d ", mode_order_X[m]);
 	}
 	
+	printf ("\nnumber_of_threads : %d\n", tk);
 	
     // sptSparseTensorSortIndexCmode(X, 1, 1, 1, 2);
 	
